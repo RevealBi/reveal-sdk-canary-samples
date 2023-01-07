@@ -7,7 +7,7 @@ The RevealView will be evetually replaced by the new DashboardViewer. The Dashbo
 **Available options**
 
 ```
-interface DVOptions {
+interface ViewerOptions {
     canEdit: boolean;
     canSave: boolean;
     canSaveAs: boolean;
@@ -24,7 +24,7 @@ interface DVOptions {
             showExportToPowerPoint: boolean;
             showExportToPdf: boolean;
             showRefresh: boolean;
-            items: DVMenuItem[];
+            items: ViewerMenuItem[];
         }
     }
 
@@ -49,13 +49,13 @@ interface DVOptions {
         menu: {
             showCopy: boolean;
             showDuplicate: boolean;
-            items: DVMenuItem[];
+            items: ViewerMenuItem[];
         }
     }
 
     editor: {
-        chartTypes: DVChartType[];
-        defaultChartType: DVChartType;        
+        chartTypes: ChartType[];
+        defaultChartType: ChartType;        
         canAddPostCalculatedFields: boolean;        
         showAddCalculatedFields: boolean;
         showDataBlending: boolean;

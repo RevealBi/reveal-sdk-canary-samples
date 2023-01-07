@@ -17,7 +17,7 @@ const dv = new DashboardViewer("#viewer", "Sales", {
     },
 });
 
-dv.dataSourcesRequested = (onComplete) => {
+dv.onDataSourcesRequested = (onComplete) => {
     const restDataSource = new $.ig.RVRESTDataSource();
     restDataSource.id = "RestDataSource"
     restDataSource.url = "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9";
