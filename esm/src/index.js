@@ -1,4 +1,4 @@
-import { DashboardViewer } from "reveal-sdk-canary";
+import { DashboardViewer, VisualizationViewer } from "reveal-sdk-canary";
 
 const dv = new DashboardViewer("#viewer", "Sales", {
     canEdit: false,
@@ -27,3 +27,19 @@ dv.onDataSourcesRequested = (onComplete) => {
 
     onComplete(new $.ig.RevealDataSources([restDataSource], [], false));
 }
+
+//by title
+//const vv1 = new VisualizationViewer("#viewer", "Sales", "New vs Renewal Sales");
+
+//by index with options
+const vv3 = new VisualizationViewer("#viewer", "Sales", 1, {
+    showChangeChartType: true,
+    menu: {
+        showMenu: true,
+        items: [
+            { title: "My Custom Item", click: (viz) => {
+                console.log(`I clicked viz with title: ${viz.title}`);
+            }}
+        ]
+    }
+});
