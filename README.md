@@ -39,6 +39,9 @@ interface DashboardViewerOptions {
     canEdit: boolean;
     canSave: boolean;
     canSaveAs: boolean;
+    dataSources: [
+        { type: string, id: string, title: string, subtitle: string}
+    ]
     startInEditMode: boolean;
     startWithNewVisualization: boolean;
 
