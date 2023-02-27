@@ -1,11 +1,12 @@
 import { DashboardViewer, VisualizationViewer } from "reveal-sdk-canary";
 
 const dv = new DashboardViewer("#viewer", "Sales", {
-    canEdit: false,
+    canSaveAs: false,
+    dataSources: [
+        { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" },
+    ],
     header: {
         menu: {
-            showExportToPdf: false,
-            showExportToImage: false,
             items: [
                 {
                     title: "My Menu Item", click: () => {
@@ -16,17 +17,6 @@ const dv = new DashboardViewer("#viewer", "Sales", {
         }
     },
 });
-
-dv.onDataSourcesRequested = (onComplete) => {
-    const restDataSource = new $.ig.RVRESTDataSource();
-    restDataSource.id = "RestDataSource"
-    restDataSource.url = "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9";
-    restDataSource.title = "Sales by Category";
-    restDataSource.subtitle = "Excel2Json";
-    restDataSource.useAnonymousAuthentication = true;
-
-    onComplete(new $.ig.RevealDataSources([restDataSource], [], false));
-}
 
 //by title
 //new VisualizationViewer("#viewer", "Sales", "New vs Renewal Sales");
