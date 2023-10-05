@@ -1,4 +1,6 @@
-import { DashboardViewer, VisualizationViewer } from "reveal-sdk-canary";
+import { DashboardViewer, VisualizationViewer, RevealSdkSettings } from "@revealbi/ui";
+
+RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
 
 const dv = new DashboardViewer("#viewer", "Sales", {
     canSaveAs: false,

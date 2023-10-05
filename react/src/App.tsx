@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { DashboardViewer, RevealSdkSettings } from 'reveal-sdk-canary';
+import { DashboardViewer, RevealSdkSettings } from '@revealbi/ui';
 import './App.css';
 
-RevealSdkSettings.ServerUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
+RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
 
 function App() {
   
