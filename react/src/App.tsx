@@ -1,28 +1,32 @@
-import React, { useEffect } from 'react';
-import { DashboardViewer, RevealSdkSettings } from '@revealbi/ui';
+import React from 'react';
 import './App.css';
-
-RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
+import { Dashboard, DashboardViewerOptions, RevealSdkSettings } from '@revealbi/ui';
+import { DashboardViewer } from '@revealbi/ui-react';
 
 function App() {
-  
-  useEffect(() => {
-    var dv = new DashboardViewer("#revealView", "Sales", {
-      dataSources: [
-        { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" },
-        {
-            type: "MicrosoftSqlServer", id: "MySQLServer", title: "My SQL Server", items: [
-                { table: "Products", title: "My Products Table" },
-                { table: "Orders", title: "My Orders Table" },
-                { table: "OrderDetails", title: "My OrderDetails Table" },
-            ]
-        },
-      ]
-    });
-  }, [])
+
+  RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
+
+  const dashboard: string | Dashboard = "Sales";
+  const options: DashboardViewerOptions = {
+    filters: {
+      showFilters: false,
+    },
+    header: {
+      menu: {
+        items: [
+          { title: "Item 1", click: () => alert("Item 1") },
+          { title: "Item 2", click: () => alert("Item 2") },
+          { title: "Item 3", click: () => alert("Item 3") },
+        ]
+      }
+    },
+  }
 
   return (
-    <div id="revealView" style={{height: "100vh", width: "100%"}}></div>
+    <div className="App">
+      <DashboardViewer dashboard={dashboard} options={options}></DashboardViewer>
+    </div>
   );
 }
 
