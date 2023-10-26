@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@revealbi/ui": "^0.0.3",
-    "@revealbi/ui-react": "^0.0.1",
+    "@revealbi/dom": "^0.0.4",
+    "@revealbi/ui": "^0.0.7",
+    "@revealbi/ui-react": "^0.0.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
