@@ -14,28 +14,29 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="https://dl.revealbi.io/reveal/libs/1.6.0/infragistics.reveal.js"></script>
-    <script src="https://unpkg.com/@revealbi/ui@0.0.3/index.umd.js"></script>
+    <script src="https://unpkg.com/@revealbi/ui@0.0.8/index.umd.js"></script>
+    <script src="https://unpkg.com/@revealbi/dom@0.0.5/index.umd.js"></script>
 
     <script type="text/javascript">
-        rv.RevealSdkSettings.serverUrl ="https://samples.revealbi.io/upmedia-backend/reveal-api/";
+        ui.RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
 
-        const dv = new rv.DashboardViewer("#viewer", "Sales", {
-            canSaveAs: false,
-            dataSources: [
-                { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" }
-            ],
-            header: {
-                menu: {
-                    items: [
-                        {
-                            title: "My Menu Item", click: () => {
-                                console.log("I clicked this");
-                            }
-                        }
-                    ]
-                }
-            },
-        });
+        // const dv = new ui.DashboardViewer("#viewer", "Sales", {
+        //     canSaveAs: false,
+        //     dataSources: [
+        //         { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" }
+        //     ],
+        //     header: {
+        //         menu: {
+        //             items: [
+        //                 {
+        //                     title: "My Menu Item", click: () => {
+        //                         console.log("I clicked this");
+        //                     }
+        //                 }
+        //             ]
+        //         }
+        //     },
+        // });
 
         //by title title
         //new rv.VisualizationViewer("#viewer", "Sales", "New vs Renewal Sales");
@@ -54,6 +55,63 @@
         //         ]
         //     }
         // });
+
+        generateDashboard().then(dashboard => {
+            const viewer = new ui.DashboardViewer("#viewer", dashboard);
+        });
+
+        async function generateDashboard() {
+            const excelDataSourceItem = new dom.RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
+                .setTitle("Excel Data Source")
+                .setSubtitle("Marketing Sheet")
+                .useExcel("Marketing")
+                .setFields([
+                    new dom.DateField("Date"),
+                    new dom.NumberField("Spend"),
+                    new dom.NumberField("Budget"),
+                    new dom.NumberField("CTR"),
+                    new dom.NumberField("Avg. CPC"),
+                    new dom.NumberField("Traffic"),
+                    new dom.NumberField("Paid Traffic"),
+                    new dom.NumberField("Other Traffic"),
+                    new dom.NumberField("Conversions"),
+                    new dom.TextField("Territory"),
+                    new dom.TextField("CampaignID"),
+                    new dom.NumberField("New Seats"),
+                    new dom.NumberField("Paid %"),
+                    new dom.NumberField("Organic %")
+                ])
+                .build();
+
+            const document = new dom.RdashDocument("Linking Dashboard");
+
+            document.filters.push(new dom.DashboardDateFilter());
+
+            const funnel = new dom.FunnelChartVisualization("Funnel Chart", excelDataSourceItem).setLabel("CampaignID").setValue("Conversions");
+
+            const linkedDocument = await dom.RdashDocument.load("Campaigns");
+            const filter = linkedDocument.filters.find(f => f.title === "CampaignID");
+
+            const linker = new dom.VisualizationLinker();
+            linker.links = [
+                new dom.UrlLink("Open URL", "https://www.brianlagunas.com/[CampaignID]"),
+                new dom.DashboardLink("Open Dashboard", "Campaigns",
+                    [
+                        new dom.LinkFilter("Campaigns Filter", filter.id, filter.title),
+                        new dom.DateLinkFilter()
+                    ])
+            ]
+            funnel.linker = linker;
+
+            const pivot = new dom.PivotVisualization("New Seats by Campaign ID", excelDataSourceItem).setRow("CampaignID").setValues("CTR", "Avg. CPC", "New Seats");
+            pivot.linker = new dom.VisualizationLinker()
+                .addUrl("Open URL", "https://www.brianlagunas.com/[CampaignID]")
+                .addDashboard("Open Dashboard", "Campaigns", [new dom.LinkFilter("Campaigns Filter", filter.id, filter.title), new dom.DateLinkFilter()]);
+
+            document.visualizations = [funnel, pivot];
+
+            return document;
+        }
 
     </script>
 </body>

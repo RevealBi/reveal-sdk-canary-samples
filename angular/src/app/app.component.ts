@@ -34,6 +34,7 @@ export class AppComponent {
     });
   }
 
+  //use the DOM to create a new dashboard
   async generateDashboard() {
     const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
     .setTitle("Excel Data Source")
