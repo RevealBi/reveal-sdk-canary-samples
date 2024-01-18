@@ -1,8 +1,8 @@
-import { DashboardViewer, VisualizationViewer, RevealSdkSettings } from "@revealbi/ui";
+import { VisualizationViewer, RevealSdkSettings, RevealView } from "@revealbi/ui";
 
 RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
 
-const dv = new DashboardViewer("#viewer", "Sales", {
+const dv = new RevealView("#viewer", "Sales", {
     canSaveAs: false,
     dataSources: [
         { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" },

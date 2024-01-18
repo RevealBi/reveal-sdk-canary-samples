@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { DashboardViewerOptions, RevealSdkSettings } from '@revealbi/ui';
-import { DashboardViewer } from '@revealbi/ui-react';
+import { RevealViewOptions, RevealSdkSettings } from '@revealbi/ui';
+import { RevealView } from '@revealbi/ui-react';
 import { RestServiceBuilder, DateField, NumberField, TextField, RdashDocument, DashboardDateFilter, FunnelChartVisualization, VisualizationLinker, UrlLink, DashboardLink, LinkFilter, DateLinkFilter, PivotVisualization } from '@revealbi/dom';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
 
   const [dashboard, setDashboard] = React.useState<any>();
 
-  const options: DashboardViewerOptions = {
+  const options: RevealViewOptions = {
     filters: {
       showFilters: true,
     },
@@ -86,7 +86,7 @@ function App() {
 
   return (
     <div className="App">
-      <DashboardViewer dashboard={dashboard} options={options}></DashboardViewer>
+      <RevealView dashboard={dashboard} options={options}></RevealView>
     </div>
   );
 }

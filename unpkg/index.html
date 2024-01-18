@@ -14,8 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="https://dl.revealbi.io/reveal/libs/1.6.0/infragistics.reveal.js"></script>
-    <script src="https://unpkg.com/@revealbi/ui@0.0.8/index.umd.js"></script>
-    <script src="https://unpkg.com/@revealbi/dom@0.0.5/index.umd.js"></script>
+    <script src="https://unpkg.com/@revealbi/ui@0.1.0/index.umd.js"></script>
+    <script src="https://unpkg.com/@revealbi/dom@0.0.9/index.umd.js"></script>
 
     <script type="text/javascript">
         ui.RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
@@ -57,7 +57,7 @@
         // });
 
         generateDashboard().then(dashboard => {
-            const viewer = new ui.DashboardViewer("#viewer", dashboard);
+            const viewer = new ui.RevealView("#viewer", dashboard);
         });
 
         async function generateDashboard() {

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RevealBIModule } from '@revealbi/ui-angular';
+import { RevealUIModule } from '@revealbi/ui-angular';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { RevealBIModule } from '@revealbi/ui-angular';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RevealBIModule
+    RevealUIModule
   ],
   providers: [],
   bootstrap: [AppComponent]
