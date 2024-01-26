@@ -5,11 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal Sdk - Web Component</title>
+    <!-- <link rel="stylesheet" href="node_modules/@revealbi/ui/themes/light.css"> -->
+    <!-- Use with the MiniCssExtractPlugin -->
+    <!-- <link rel="stylesheet" href="dist/main.css"> -->
+    <style>
+        /* use the :defined CSS pseudo-class to “hide” custom elements that haven’t been registered yet. */
+        :not(:defined) {
+            visibility: hidden;
+        }
+    </style>
 </head>
 
 <body>
 
     <div id="viewer" style="height: 920px; width: 100%;"></div>
+
+    <rv-dialog id="dialog" title="This is my test title">
+        <h1>This is a test</h1>
+    </rv-dialog>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>

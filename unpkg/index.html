@@ -6,43 +6,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal Sdk - Web Component</title>
+    <link rel="stylesheet" href="https://unpkg.com/@revealbi/ui@0.1.12/themes/light.css">
+    <style>
+        /* use the :defined CSS pseudo-class to “hide” custom elements that haven’t been registered yet. */
+        :not(:defined) {
+            visibility: hidden;
+        }
+    </style>
 </head>
 
 <body>
     <div id="viewer" style="height: 920px; width: 100%;"></div>
 
+    <rv-dialog id="dialog" title="My Title">
+        <h1>This is my content</h1>
+    </rv-dialog>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-    <script src="https://dl.revealbi.io/reveal/libs/1.6.0/infragistics.reveal.js"></script>
-    <script src="https://unpkg.com/@revealbi/ui@0.1.0/index.umd.js"></script>
+    <script src="https://dl.revealbi.io/reveal/libs/1.6.2/infragistics.reveal.js"></script>
+    <script src="https://unpkg.com/@revealbi/ui@0.1.12/index.umd.js"></script>
     <script src="https://unpkg.com/@revealbi/dom@0.0.9/index.umd.js"></script>
 
-    <script type="text/javascript">
+    <script type="module">
         ui.RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
 
-        // const dv = new ui.DashboardViewer("#viewer", "Sales", {
-        //     canSaveAs: false,
-        //     dataSources: [
-        //         { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" }
-        //     ],
-        //     header: {
-        //         menu: {
-        //             items: [
-        //                 {
-        //                     title: "My Menu Item", click: () => {
-        //                         console.log("I clicked this");
-        //                     }
-        //                 }
-        //             ]
-        //         }
-        //     },
-        // });
+        const dialog = document.getElementById("dialog");
+        dialog.show().then(() => {
+            console.log("Dialog closed");
+        });
+
+
+        const dv = new ui.RevealView("#viewer", "Sales", {
+            canSaveAs: false,
+            dataSources: [
+                { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" }
+            ],
+            header: {
+                menu: {
+                    items: [
+                        {
+                            title: "My Menu Item", click: () => {
+                                console.log("I clicked this");
+                            }
+                        }
+                    ]
+                }
+            },
+        });
 
         //by title title
-        //new rv.VisualizationViewer("#viewer", "Sales", "New vs Renewal Sales");
+        //new ui.VisualizationViewer("#viewer", "Sales", "New vs Renewal Sales");
 
         //by index with options
-        //new rv.VisualizationViewer("#viewer", "Sales", 1, {
+        // new ui.VisualizationViewer("#viewer", "Sales", 1, {
         //     showChangeChartType: true,
         //     menu: {
         //         showMenu: true,
@@ -56,62 +73,62 @@
         //     }
         // });
 
-        generateDashboard().then(dashboard => {
-            const viewer = new ui.RevealView("#viewer", dashboard);
-        });
+        // generateDashboard().then(dashboard => {
+        //     const viewer = new ui.RevealView("#viewer", dashboard);
+        // });
 
-        async function generateDashboard() {
-            const excelDataSourceItem = new dom.RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
-                .setTitle("Excel Data Source")
-                .setSubtitle("Marketing Sheet")
-                .useExcel("Marketing")
-                .setFields([
-                    new dom.DateField("Date"),
-                    new dom.NumberField("Spend"),
-                    new dom.NumberField("Budget"),
-                    new dom.NumberField("CTR"),
-                    new dom.NumberField("Avg. CPC"),
-                    new dom.NumberField("Traffic"),
-                    new dom.NumberField("Paid Traffic"),
-                    new dom.NumberField("Other Traffic"),
-                    new dom.NumberField("Conversions"),
-                    new dom.TextField("Territory"),
-                    new dom.TextField("CampaignID"),
-                    new dom.NumberField("New Seats"),
-                    new dom.NumberField("Paid %"),
-                    new dom.NumberField("Organic %")
-                ])
-                .build();
+        // async function generateDashboard() {
+        //     const excelDataSourceItem = new dom.RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
+        //         .setTitle("Excel Data Source")
+        //         .setSubtitle("Marketing Sheet")
+        //         .useExcel("Marketing")
+        //         .setFields([
+        //             new dom.DateField("Date"),
+        //             new dom.NumberField("Spend"),
+        //             new dom.NumberField("Budget"),
+        //             new dom.NumberField("CTR"),
+        //             new dom.NumberField("Avg. CPC"),
+        //             new dom.NumberField("Traffic"),
+        //             new dom.NumberField("Paid Traffic"),
+        //             new dom.NumberField("Other Traffic"),
+        //             new dom.NumberField("Conversions"),
+        //             new dom.TextField("Territory"),
+        //             new dom.TextField("CampaignID"),
+        //             new dom.NumberField("New Seats"),
+        //             new dom.NumberField("Paid %"),
+        //             new dom.NumberField("Organic %")
+        //         ])
+        //         .build();
 
-            const document = new dom.RdashDocument("Linking Dashboard");
+        //     const document = new dom.RdashDocument("Linking Dashboard");
 
-            document.filters.push(new dom.DashboardDateFilter());
+        //     document.filters.push(new dom.DashboardDateFilter());
 
-            const funnel = new dom.FunnelChartVisualization("Funnel Chart", excelDataSourceItem).setLabel("CampaignID").setValue("Conversions");
+        //     const funnel = new dom.FunnelChartVisualization("Funnel Chart", excelDataSourceItem).setLabel("CampaignID").setValue("Conversions");
 
-            const linkedDocument = await dom.RdashDocument.load("Campaigns");
-            const filter = linkedDocument.filters.find(f => f.title === "CampaignID");
+        //     const linkedDocument = await dom.RdashDocument.load("Campaigns");
+        //     const filter = linkedDocument.filters.find(f => f.title === "CampaignID");
 
-            const linker = new dom.VisualizationLinker();
-            linker.links = [
-                new dom.UrlLink("Open URL", "https://www.brianlagunas.com/[CampaignID]"),
-                new dom.DashboardLink("Open Dashboard", "Campaigns",
-                    [
-                        new dom.LinkFilter("Campaigns Filter", filter.id, filter.title),
-                        new dom.DateLinkFilter()
-                    ])
-            ]
-            funnel.linker = linker;
+        //     const linker = new dom.VisualizationLinker();
+        //     linker.links = [
+        //         new dom.UrlLink("Open URL", "https://www.brianlagunas.com/[CampaignID]"),
+        //         new dom.DashboardLink("Open Dashboard", "Campaigns",
+        //             [
+        //                 new dom.LinkFilter("Campaigns Filter", filter.id, filter.title),
+        //                 new dom.DateLinkFilter()
+        //             ])
+        //     ]
+        //     funnel.linker = linker;
 
-            const pivot = new dom.PivotVisualization("New Seats by Campaign ID", excelDataSourceItem).setRow("CampaignID").setValues("CTR", "Avg. CPC", "New Seats");
-            pivot.linker = new dom.VisualizationLinker()
-                .addUrl("Open URL", "https://www.brianlagunas.com/[CampaignID]")
-                .addDashboard("Open Dashboard", "Campaigns", [new dom.LinkFilter("Campaigns Filter", filter.id, filter.title), new dom.DateLinkFilter()]);
+        //     const pivot = new dom.PivotVisualization("New Seats by Campaign ID", excelDataSourceItem).setRow("CampaignID").setValues("CTR", "Avg. CPC", "New Seats");
+        //     pivot.linker = new dom.VisualizationLinker()
+        //         .addUrl("Open URL", "https://www.brianlagunas.com/[CampaignID]")
+        //         .addDashboard("Open Dashboard", "Campaigns", [new dom.LinkFilter("Campaigns Filter", filter.id, filter.title), new dom.DateLinkFilter()]);
 
-            document.visualizations = [funnel, pivot];
+        //     document.visualizations = [funnel, pivot];
 
-            return document;
-        }
+        //     return document;
+        // }
 
     </script>
 </body>

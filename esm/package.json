@@ -12,10 +12,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^6.9.1",
+    "mini-css-extract-plugin": "^2.7.7",
+    "style-loader": "^3.3.4",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "@revealbi/ui": "^0.1.0"
+    "@revealbi/ui": "^0.1.12"
   }
 }

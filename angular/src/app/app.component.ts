@@ -11,6 +11,7 @@ RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/revea
 })
 export class AppComponent {
   title = 'RevealUIAngularDemo';
+  open:boolean = true;
   dashboard: any;
   options: RevealViewOptions = {
     filters: {

@@ -1,4 +1,5 @@
 import { VisualizationViewer, RevealSdkSettings, RevealView } from "@revealbi/ui";
+import "@revealbi/ui/themes/light.css";
 
 RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
 
@@ -19,6 +20,9 @@ const dv = new RevealView("#viewer", "Sales", {
         }
     },
 });
+
+const dialog = document.getElementById("dialog");
+dialog.open = true;
 
 //by title
 //new VisualizationViewer("#viewer", "Sales", "New vs Renewal Sales");

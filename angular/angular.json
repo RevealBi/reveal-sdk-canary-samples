@@ -30,7 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "@revealbi/ui/themes/light.css"
             ],
             "scripts": []
           },
