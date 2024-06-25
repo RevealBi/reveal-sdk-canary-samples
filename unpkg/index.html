@@ -6,8 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal Sdk - Web Component</title>
-    <link rel="stylesheet" href="https://unpkg.com/@revealbi/ui@0.1.12/themes/light.css">
+    <link rel="stylesheet" href="https://unpkg.com/@revealbi/ui@0.2.0/themes/light.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="https://dl.revealbi.io/reveal/libs/1.6.6/infragistics.reveal.js"></script>
+    <script src="https://unpkg.com/@revealbi/ui@0.2.1/index.umd.js"></script>
+    <script>
+        rv.RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
+    </script>    
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         /* use the :defined CSS pseudo-class to “hide” custom elements that haven’t been registered yet. */
         :not(:defined) {
             visibility: hidden;
@@ -16,28 +30,14 @@
 </head>
 
 <body>
-    <div id="viewer" style="height: 920px; width: 100%;"></div>
+    <rv-reveal-view id="viewer" dashboard="Sales"></rv-reveal-view>
 
     <rv-dialog id="dialog" title="My Title">
         <h1>This is my content</h1>
     </rv-dialog>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-    <script src="https://dl.revealbi.io/reveal/libs/1.6.2/infragistics.reveal.js"></script>
-    <script src="https://unpkg.com/@revealbi/ui@0.1.12/index.umd.js"></script>
-    <script src="https://unpkg.com/@revealbi/dom@0.0.9/index.umd.js"></script>
-
-    <script type="module">
-        ui.RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
-
-        const dialog = document.getElementById("dialog");
-        dialog.show().then(() => {
-            console.log("Dialog closed");
-        });
-
-
-        const dv = new ui.RevealView("#viewer", "Sales", {
+    <script>
+        const options = {
             canSaveAs: false,
             dataSources: [
                 { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" }
@@ -53,83 +53,17 @@
                     ]
                 }
             },
+        };
+
+        const revealView = document.getElementById("viewer");
+        revealView.initialized = () => {
+            revealView.options = options;
+        };        
+
+        const dialog = document.getElementById("dialog");
+        dialog.show().then(() => {
+            console.log("Dialog closed");
         });
-
-        //by title title
-        //new ui.VisualizationViewer("#viewer", "Sales", "New vs Renewal Sales");
-
-        //by index with options
-        // new ui.VisualizationViewer("#viewer", "Sales", 1, {
-        //     showChangeChartType: true,
-        //     menu: {
-        //         showMenu: true,
-        //         items: [
-        //             {
-        //                 title: "My Custom Item", click: (viz) => {
-        //                     console.log(`I clicked viz with title: ${viz.title}`);
-        //                 }
-        //             }
-        //         ]
-        //     }
-        // });
-
-        // generateDashboard().then(dashboard => {
-        //     const viewer = new ui.RevealView("#viewer", dashboard);
-        // });
-
-        // async function generateDashboard() {
-        //     const excelDataSourceItem = new dom.RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
-        //         .setTitle("Excel Data Source")
-        //         .setSubtitle("Marketing Sheet")
-        //         .useExcel("Marketing")
-        //         .setFields([
-        //             new dom.DateField("Date"),
-        //             new dom.NumberField("Spend"),
-        //             new dom.NumberField("Budget"),
-        //             new dom.NumberField("CTR"),
-        //             new dom.NumberField("Avg. CPC"),
-        //             new dom.NumberField("Traffic"),
-        //             new dom.NumberField("Paid Traffic"),
-        //             new dom.NumberField("Other Traffic"),
-        //             new dom.NumberField("Conversions"),
-        //             new dom.TextField("Territory"),
-        //             new dom.TextField("CampaignID"),
-        //             new dom.NumberField("New Seats"),
-        //             new dom.NumberField("Paid %"),
-        //             new dom.NumberField("Organic %")
-        //         ])
-        //         .build();
-
-        //     const document = new dom.RdashDocument("Linking Dashboard");
-
-        //     document.filters.push(new dom.DashboardDateFilter());
-
-        //     const funnel = new dom.FunnelChartVisualization("Funnel Chart", excelDataSourceItem).setLabel("CampaignID").setValue("Conversions");
-
-        //     const linkedDocument = await dom.RdashDocument.load("Campaigns");
-        //     const filter = linkedDocument.filters.find(f => f.title === "CampaignID");
-
-        //     const linker = new dom.VisualizationLinker();
-        //     linker.links = [
-        //         new dom.UrlLink("Open URL", "https://www.brianlagunas.com/[CampaignID]"),
-        //         new dom.DashboardLink("Open Dashboard", "Campaigns",
-        //             [
-        //                 new dom.LinkFilter("Campaigns Filter", filter.id, filter.title),
-        //                 new dom.DateLinkFilter()
-        //             ])
-        //     ]
-        //     funnel.linker = linker;
-
-        //     const pivot = new dom.PivotVisualization("New Seats by Campaign ID", excelDataSourceItem).setRow("CampaignID").setValues("CTR", "Avg. CPC", "New Seats");
-        //     pivot.linker = new dom.VisualizationLinker()
-        //         .addUrl("Open URL", "https://www.brianlagunas.com/[CampaignID]")
-        //         .addDashboard("Open Dashboard", "Campaigns", [new dom.LinkFilter("Campaigns Filter", filter.id, filter.title), new dom.DateLinkFilter()]);
-
-        //     document.visualizations = [funnel, pivot];
-
-        //     return document;
-        // }
-
     </script>
 </body>
 

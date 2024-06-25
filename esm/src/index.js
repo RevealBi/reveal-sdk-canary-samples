@@ -1,9 +1,9 @@
-import { VisualizationViewer, RevealSdkSettings, RevealView } from "@revealbi/ui";
+import { RevealSdkSettings } from "@revealbi/ui";
 import "@revealbi/ui/themes/light.css";
 
 RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
 
-const dv = new RevealView("#viewer", "Sales", {
+const options = {
     canSaveAs: false,
     dataSources: [
         { type: "REST", title: "Sales by Category", subtitle: "Excel2Json", url: "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9" },
@@ -19,23 +19,10 @@ const dv = new RevealView("#viewer", "Sales", {
             ]
         }
     },
-});
+};
+
+const revealView = document.getElementById("viewer");
+revealView.options = options;
 
 const dialog = document.getElementById("dialog");
 dialog.open = true;
-
-//by title
-//new VisualizationViewer("#viewer", "Sales", "New vs Renewal Sales");
-
-//by index with options
-// new VisualizationViewer("#viewer", "Sales", 1, {
-//     showChangeChartType: true,
-//     menu: {
-//         showMenu: true,
-//         items: [
-//             { title: "My Custom Item", click: (viz) => {
-//                 console.log(`I clicked viz with title: ${viz.title}`);
-//             }}
-//         ]
-//     }
-// });
