@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { RevealViewOptions, RevealSdkSettings } from '@revealbi/ui';
-import { RvRevealView } from '@revealbi/ui-react';
-import { RestServiceBuilder, DateField, NumberField, TextField, RdashDocument, DashboardDateFilter, FunnelChartVisualization, VisualizationLinker, UrlLink, DashboardLink, LinkFilter, DateLinkFilter, PivotVisualization } from '@revealbi/dom';
+import { RvDialog, RvRevealView } from '@revealbi/ui-react';
 
 function App() {
 
@@ -28,6 +27,9 @@ function App() {
   return (
     <div style={{height: '100%'}}>
       <RvRevealView dashboard={dashboard} options={options}></RvRevealView>
+      <RvDialog title='My Dialog' open={true}>
+        <p>Hello!</p>
+      </RvDialog>
     </div>
   );
 }

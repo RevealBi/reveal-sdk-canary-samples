@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@revealbi/dom": "^0.0.5",
-    "@revealbi/ui": "^0.2.0",
+    "@revealbi/ui": "^0.2.2",
     "@revealbi/ui-react": "^0.2.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

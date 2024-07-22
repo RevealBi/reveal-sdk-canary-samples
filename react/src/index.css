@@ -1,3 +1,5 @@
+@import "@revealbi/ui/themes/light.css";
+
 html, body, #root {
   height: 100%;
   width: 100%;
