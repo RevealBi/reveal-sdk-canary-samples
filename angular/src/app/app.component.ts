@@ -1,8 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { DashboardDateFilter, DashboardLink, DateField, DateLinkFilter, FunnelChartVisualization, LinkFilter, NumberField, PivotVisualization, RdashDocument, RestServiceBuilder, TextField, UrlLink, VisualizationLinker } from '@revealbi/dom';
-import { RevealSdkSettings, RevealViewOptions, MenuItem, SeriesColorRequestedArgs } from '@revealbi/ui';
-
-RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
+import { RevealViewOptions, MenuItem, SeriesColorRequestedArgs } from '@revealbi/ui';
 
 @Component({
   selector: 'app-root',

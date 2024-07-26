@@ -56,9 +56,7 @@
         };
 
         const revealView = document.getElementById("viewer");
-        revealView.initialized = () => {
-            revealView.options = options;
-        };        
+        revealView.options = options;    
 
         const dialog = document.getElementById("dialog");
         dialog.show().then(() => {
