@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { RevealViewOptions, RevealSdkSettings } from '@revealbi/ui';
-import { RvDialog, RvRevealView } from '@revealbi/ui-react';
+import { RevealViewOptions } from 'reveal-sdk-wc-wrappers';
+import { RvRevealView } from 'reveal-sdk-wc-wrappers-react';
 
 function App() {
 
-  RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
-
-  const [dashboard, setDashboard] = React.useState<any>("Sales");
+  const [dashboard, setDashboard] = React.useState<any>("Marketing");
 
   const options: RevealViewOptions = {
     filters: {
@@ -24,12 +22,15 @@ function App() {
     },
   }
 
+  useEffect(() => {
+    $.ig.RVDashboard.loadDashboard("Marketing", (dashboard: any) => {
+      setDashboard(dashboard);
+    });
+  }, []);
+
   return (
     <div style={{height: '100%'}}>
       <RvRevealView dashboard={dashboard} options={options}></RvRevealView>
-      <RvDialog title='My Dialog' open={true}>
-        <p>Hello!</p>
-      </RvDialog>
     </div>
   );
 }

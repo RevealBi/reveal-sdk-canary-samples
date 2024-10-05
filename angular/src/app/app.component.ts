@@ -1,6 +1,5 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { DashboardDateFilter, DashboardLink, DateField, DateLinkFilter, FunnelChartVisualization, LinkFilter, NumberField, PivotVisualization, RdashDocument, RestServiceBuilder, TextField, UrlLink, VisualizationLinker } from '@revealbi/dom';
-import { RevealViewOptions, MenuItem, SeriesColorRequestedArgs } from '@revealbi/ui';
+import { Component } from '@angular/core';
+import { RevealViewOptions } from 'reveal-sdk-wc-wrappers'
 
 @Component({
   selector: 'app-root',

@@ -1,7 +1,7 @@
-import { RevealSdkSettings } from "@revealbi/ui";
-import "@revealbi/ui/themes/light.css";
+import { defineRevealSdkWrappers } from "reveal-sdk-wc-wrappers";
+defineRevealSdkWrappers();
 
-RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
+$.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
 
 const options = {
     canSaveAs: false,
@@ -23,6 +23,3 @@ const options = {
 
 const revealView = document.getElementById("viewer");
 revealView.options = options;
-
-const dialog = document.getElementById("dialog");
-dialog.open = true;

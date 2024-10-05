@@ -8,35 +8,27 @@
     <title>Reveal Sdk - Web Component</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@revealbi/ui/themes/light.css">
     <style>
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
         }
-
-        /* use the :defined CSS pseudo-class to “hide” custom elements that haven’t been registered yet. */
-        :not(:defined) {
-            visibility: hidden;
-        }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="https://dl.revealbi.io/reveal/libs/1.7.0/infragistics.reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal-sdk-wc-wrappers/index.umd.min.js"></script>
+    <script>
+        $.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
+    </script>
 </head>
 
 <body>
     <rv-reveal-view id="viewer" dashboard="Sales"></rv-reveal-view>
-
-    <rv-dialog id="dialog" title="My Title">
-        <h1>This is my content</h1>
-    </rv-dialog>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.21/dayjs.min.js"></script>
-    <script src="https://dl.revealbi.io/reveal/libs/1.6.6/infragistics.reveal.js"></script>
-
-    <script type="module">
-        import { RevealSdkSettings } from 'https://cdn.jsdelivr.net/npm/@revealbi/ui'
-        RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
-
+    <script>
         const options = {
             canSaveAs: false,
             dataSources: [
@@ -56,12 +48,10 @@
         };
 
         const revealView = document.getElementById("viewer");
-        revealView.options = options;    
-
-        const dialog = document.getElementById("dialog");
-        dialog.show().then(() => {
-            console.log("Dialog closed");
-        });
+        //since we set the dashboard property on the web component, we need to wait for it to be initialized before setting the options
+        revealView.initialized = () => {
+            revealView.options = options;
+        };        
     </script>
 </body>
 

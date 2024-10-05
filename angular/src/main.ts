@@ -2,9 +2,11 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 
-import { RevealSdkSettings } from '@revealbi/ui';
+import { defineRevealSdkWrappers } from "reveal-sdk-wc-wrappers";
+defineRevealSdkWrappers();
 
-RevealSdkSettings.serverUrl = "https://samples.revealbi.io/upmedia-backend/reveal-api/";
+declare let $: any;
+$.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)
