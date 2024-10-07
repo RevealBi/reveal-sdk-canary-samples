@@ -1,4 +1,4 @@
-import { defineRevealSdkWrappers } from "reveal-sdk-wc-wrappers";
+import { defineRevealSdkWrappers } from "reveal-sdk-wrappers";
 defineRevealSdkWrappers();
 
 $.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");

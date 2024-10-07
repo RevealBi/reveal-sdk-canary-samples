@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RevealViewOptions } from 'reveal-sdk-wc-wrappers'
+import { RevealViewOptions } from 'reveal-sdk-wrappers'
 
 @Component({
   selector: 'app-root',

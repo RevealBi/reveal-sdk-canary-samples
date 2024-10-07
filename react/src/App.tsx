@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { RevealViewOptions } from 'reveal-sdk-wc-wrappers';
-import { RvRevealView } from 'reveal-sdk-wc-wrappers-react';
+import { RevealViewOptions } from 'reveal-sdk-wrappers';
+import { RvRevealView } from 'reveal-sdk-wrappers-react';
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
   }
 
   useEffect(() => {
-    $.ig.RVDashboard.loadDashboard("Marketing", (dashboard: any) => {
+    $.ig.RVDashboard.loadDashboard("Sales", (dashboard: any) => {
       setDashboard(dashboard);
     });
   }, []);

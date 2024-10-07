@@ -19,6 +19,6 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "reveal-sdk-wc-wrappers": "^0.1.5"
+    "reveal-sdk-wrappers": "^0.1.0"
   }
 }

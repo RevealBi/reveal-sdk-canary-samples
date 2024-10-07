@@ -2,7 +2,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 
-import { defineRevealSdkWrappers } from "reveal-sdk-wc-wrappers";
+import { defineRevealSdkWrappers } from "reveal-sdk-wrappers";
 defineRevealSdkWrappers();
 
 declare let $: any;
