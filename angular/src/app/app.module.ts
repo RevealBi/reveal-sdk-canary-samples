@@ -1,8 +1,9 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RevealViewComponent, VisualizationViewerComponent } from 'reveal-sdk-wrappers-angular';
 
 @NgModule({
   declarations: [
@@ -11,9 +12,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RevealViewComponent,
   ],
   providers: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

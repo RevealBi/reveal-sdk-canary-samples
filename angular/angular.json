@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "RevealUIAngularDemo:build:production"
+              "buildTarget": "RevealUIAngularDemo:build:production"
             },
             "development": {
-              "browserTarget": "RevealUIAngularDemo:build:development"
+              "buildTarget": "RevealUIAngularDemo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "RevealUIAngularDemo:build"
+            "buildTarget": "RevealUIAngularDemo:build"
           }
         },
         "test": {

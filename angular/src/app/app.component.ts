@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RevealViewOptions } from 'reveal-sdk-wrappers'
+import { DataSourcesRequestedArgs, RevealViewOptions } from 'reveal-sdk-wrappers'
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { RevealViewOptions } from 'reveal-sdk-wrappers'
 })
 export class AppComponent {
   title = 'RevealUIAngularDemo';
-  open:boolean = true;
+  open: boolean = true;
   dashboard: any = "Sales";
   options: RevealViewOptions = {
     filters: {
@@ -24,5 +24,16 @@ export class AppComponent {
         ]
       }
     },
-  }  
+  }
+
+  dataSourcesRequested = (args: DataSourcesRequestedArgs) => {
+    console.log(args);
+    const restDataSource = new $.ig.RVRESTDataSource();
+    restDataSource.url = "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9";
+    restDataSource.title = "Sales by Category";
+    restDataSource.subtitle = "Excel2Json";
+    restDataSource.useAnonymousAuthentication = true;
+
+    return { dataSources: [restDataSource], dataSourceItems: [] };
+  }
 }
