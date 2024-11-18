@@ -19,7 +19,6 @@
     "@angular/platform-browser-dynamic": "^18.2.12",
     "@angular/router": "^18.2.12",
     "@revealbi/dom": "^0.0.5",
-    "reveal-sdk-wrappers": "^0.1.1",
     "reveal-sdk-wrappers-angular": "^0.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
